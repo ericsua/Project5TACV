@@ -1,0 +1,3 @@
+[submodule "SimpleView"]
+	path = SimpleView
+	url = https://github.com/princeton-vl/SimpleView.git
