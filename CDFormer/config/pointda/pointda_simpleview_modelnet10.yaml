@@ -1,0 +1,121 @@
+# DATA:
+#   data_name: modelnet10 
+#   data_root: 'dataset/PointDA_data/modelnet'  # Fill in the pre-processed data path (which contains the .npy files)
+#   classes: 10
+#   #classes_transfer: 10
+#   fea_dim: 3
+#   loop: 30
+#   protocol: "SimpleView"
+#   data_trained_plots: "ModelNet10"
+#   #data_tested_plots: "ShapeNet10"
+#   # data_trained_path: "mn40"
+#   # data_tested_path: "shapenet10"
+#   # class_train: "ModelNet40Ply2048"
+#   # class_test: "ShapeNet10"
+#   # classes_common_train: "classes_common_pointda"
+#   # classes_common_test: "classes"
+
+DATA:
+  data_name: modelnet10 
+  data_root: 'dataset/PointDA_data/modelnet'  # Fill in the pre-processed data path (which contains the .npy files)
+  classes: 10
+  classes_transfer: 10
+  fea_dim: 3
+  loop: 30
+  protocol: "SimpleView"
+  data_trained_plots: "ModelNet10"
+  data_tested_plots: "ModelNet10"
+  data_trained_path: "mn10"
+  data_tested_path: "mn10"
+  class_train: "ModelNet10"
+  class_test: "ModelNet10"
+  classes_common_train: "classes"
+  classes_common_test: "classes"
+
+TRAIN:
+  net: cdformer_cls 
+  stem_transformer: True
+  use_xyz: True
+  sync_bn: True  # adopt sync_bn or not
+  cutmix_prob: 0.0 #!!!!!!!!!!
+  downsample_scale: 4
+  num_points: 1024 
+  num_sample_points: 1024 #?????? # fixed point sampling of 1024 points
+  num_layers: 4 
+  depths: [1,1,3,1] 
+  channels: [64,128,256,512]
+  num_heads: [4,8,16,32]
+  up_k: 3
+  drop_path_rate: 0.3
+  concat_xyz: False
+  grid_size: 0.02
+  max_batch_points: 640000
+  max_num_neighbors: 34 # For KPConv
+  ratio: 0.25
+  k: [[8,8,8],[8,8,8],[8,8,8],[8,8,8]]
+
+  shift_range: 0.2 #!!!!!!!!!!#!!!!!!!!!!#!!!!!!!!!!
+  #rotate_along_y: True
+
+  # training
+  aug: True
+  wandb: False
+  transformer_lr_scale: 0.1
+  jitter_sigma: 0.000 #!!!!!!!!!!
+  jitter_clip: 0.00   #!!!!!!!!!!
+  scale_ratio: 0.5    #!!!!!!!!!!
+  drop_ratio: 0.0
+  rotate_along_z: False
+  scheduler_update: step 
+  scheduler: Cosine
+  power: 2.0
+  warmup: linear
+  warmup_iters: 1500
+  warmup_ratio: 0.000001
+  warmup_epochs: 2
+  warmup_gamma: 0.5
+  warmup_cycle_ratio: 0.5
+  use_amp: True
+  optimizer: AdamW 
+  ignore_label: 255
+  label_smoothing: 0.2 #!!!!!!!!!!
+  train_gpu: [0]
+  workers: 8  # data loader workers
+  batch_size: 32  # batch size for training
+  batch_size_val: 8  # batch size for validation during training, memory and speed tradeoff
+  base_lr: 0.001
+  epochs: 600
+  milestones: [360, 480]
+  start_epoch: 0
+  step_epoch: 30
+  multiplier: 0.1
+  momentum: 0.9
+  weight_decay: 0.05
+  drop_rate: 0.5
+  manual_seed: 
+  print_freq: 10
+  save_freq: 5 #!!!!!!!!!!
+  save_path: output/pointda/modelnet/
+  weight:  # path to initial weight (default: none)
+  resume:  # path to latest checkpoint (default: none)
+  evaluate: True  # evaluate on validation set, extra gpu memory needed and small batch_size_val is recommend
+  eval_freq: 5 #!!!!!!!!!!
+  train_split: train
+  clip_grad_norm: 10.0
+  debug: 1
+Distributed:
+  multi_node: 0
+  dist_url: tcp://localhost:8888
+  dist_backend: 'nccl'
+  multiprocessing_distributed: True
+  world_size: 1
+  rank: 0
+
+TEST:
+  test_split: test  # split in [train, val and test]
+  test_gpu: [0]
+  test_workers: 8
+  batch_size_test: 8
+  model_path: # Fill the path of the trained .pth file model
+  save_folder: # Fill the path to store the .npy files for each scene
+  transfer: True

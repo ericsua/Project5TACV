@@ -1,0 +1,118 @@
+    1  mkdir -p ~/miniconda3
+    2  wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+    3  bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+    4  rm -rf ~/miniconda3/miniconda.sh
+    5  ~/miniconda3/bin/conda init bash
+    6  ~/miniconda3/bin/conda init zsh
+    7  conda create -n patchmixer python=3.8
+    8  git
+    9  git clone https://github.com/davideboscaini/PatchMixer.git
+   10  cd PatchMixer/
+   11  conda activate patchmixer
+   12  clear
+   13  mkdir data/exps/
+   14  ls
+   15  pip install ninja
+   16  git clone https://github.com/POSTECH-CVLab/point-transformer.git
+   17  cd point-transformer/lib/pointops/
+   18  python setup.py install
+   19  nvcc -V
+   20  nvidia-smi
+   21  pip install torch torchvision torchaudio
+   22  python setup.py install
+   23  nvcc -V
+   24  ls /usr/bin/
+   25  conda deactivate
+   26  cd
+   27  sudo apt install g++-10 gcc-10
+   28  ls /usr/bin/ | grep g
+   29  source .bashrc 
+   30  conda activate patchmixer
+   31  cd PatchMixer/point-transformer/lib/pointops/
+   32  CC=gcc-10 CXX=g++-10 python setup.py install
+   33  cd ../../../
+   34  python3 classification/train_class_ours.py 
+   35  pip install seaborn
+   36  python3 classification/train_class_ours.py 
+   37  pip install torchinfo
+   38  python3 classification/train_class_ours.py 
+   39  pip install tensorboard
+   40  python3 classification/train_class_ours.py 
+   41  pip install scipy
+   42  python3 classification/train_class_ours.py 
+   43  pip install h5py
+   44  python3 classification/train_class_ours.py 
+   45  pip install pyntcloud
+   46  python3 classification/train_class_ours.py 
+   47  pip install einops
+   48  python3 classification/train_class_ours.py 
+   49  cd ..
+   50  wget http://modelnet.cs.princeton.edu/ModelNet40.zip
+   51  unzip ModelNet40.zip 
+   52  sudo apt install unzip
+   53  unzip ModelNet40.zip 
+   54  cd PatchMixer/
+   55  ln -s ~/ModelNet40 data
+   56  ls
+   57  cd data
+   58  mkdir exps
+   59  ls
+   60  ls ~/ModelNet40/
+   61  cd ..
+   62  rm data/
+   63  mkdir data
+   64  mkdir exps
+   65  mkdir exps/runs
+   66  mkdir exps/weights
+   67  mv -r exps data/exps
+   68  mv exps data/exps
+   69  ln -s ~/ModelNet40 data
+   70  ln -s ~/ModelNet40/ data
+   71  ln -s ~/ModelNet40/ data2
+   72  ln -s ~/ModelNet40/* data2
+   73  ln -s ~/ModelNet40/* data
+   74  python3 classification/train_class_ours.py --exp Try --path data --dataset_type mn40 --n_classes 40
+   75  cd ..
+   76  wget https://shapenet.cs.stanford.edu/media/modelnet40_normal_resampled.zip
+   77  wget https://shapenet.cs.stanford.edu/media/modelnet40_normal_resampled.zip --no-check-certificate
+   78  unzip modelnet40_normal_resampled.zip 
+   79  clear
+   80  cd PatchMixer/
+   81  nano download.sh
+   82  sudo chmod +x download.sh 
+   83  ./download.sh modelnet40
+   84  cd ..
+   85  ./PatchMixer/download.sh 
+   86  ./PatchMixer/download.sh modelnet40
+   87  cd PatchMixer/tmp/
+   88  ls
+   89  ls -all
+   90  cd ..
+   91  ./download.sh modelnet40
+   92  mkdir data/exps/
+   93  mkdir data/exps/runs
+   94  mkdir data/exps/weights
+   95  cd ..
+   96  unzip ModelNet40.zip 
+   97  ln -s ModelNet40/* PatchMixer/data/
+   98  cd PatchMixer/ & mkdir data/
+   99  cd PatchMixer
+  100  ls
+  101  mkdir data
+  102  mkdir data/exps
+  103  mkdir data/exps/runs
+  104  mkdir data/exps/weights
+  105  ln -s ../ModelNet40/ data
+  106  ls data/
+  107  ls -all data/
+  108  rm data/ModelNet40 
+  109  ln -s ../ModelNet40/* data
+  110  ls -all data
+  111  ./download.sh modelnet40
+  112  mv -r data/modelnet40_ply_hdf5_2048/* data
+  113  mv data/modelnet40_ply_hdf5_2048/* data
+  114  python3 classification/train_class_ours.py --exp Try --path data --dataset_type mn40 --n_classes 40
+  115  pip freeze > requirements.txt
+  116  conda env export | grep -v "^prefix: " > environment.yml
+  117  history
+  118  history > history.txt

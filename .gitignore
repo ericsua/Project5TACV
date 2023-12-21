@@ -1,3 +1,31 @@
+plot/
+tacv/
+*.key
+screen/
+
+.history/
+CDFormer/.bash_history
+gits/
+
+# SimpleView
+SimpleView/data/modelnet40_ply_hdf5_2048
+SimpleView/runs/
+SimpleView/pretrained/
+SimpleView/data/modelnet40_ply_hdf5_2048/
+SimpleView/ScanObjectNN/training_data/
+SimpleView/*__pycache__/
+SimpleView/runs/
+
+
+# PatchMixer
+PatchMixer/data
+PatchMixer/TODO*
+PatchMixer/*.png
+PatchMixer/classification/*.sh
+PatchMixer/segmentation/*.sh
+PatchMixer/point-transformer
+PatchMixer/.history.txt
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

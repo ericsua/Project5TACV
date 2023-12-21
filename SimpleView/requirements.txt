@@ -1,0 +1,7 @@
+git+https://github.com/imankgoyal/etw_pytorch_utils.git@v1.1.1#egg=etw_pytorch_utils
+enum34
+future
+h5py
+progressbar2==3.50.0
+tensorboardX==2.0
+yacs==0.1.6
